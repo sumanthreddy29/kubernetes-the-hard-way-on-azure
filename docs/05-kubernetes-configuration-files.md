@@ -58,30 +58,26 @@ worker-1.kubeconfig
 Generate a kubeconfig file for the `kube-proxy` service:
 
 ```shell
-kubectl config set-cluster kubernetes-the-hard-way \
-  --certificate-authority=ca.pem \
-  --embed-certs=true \
-  --server=https://${KUBERNETES_PUBLIC_ADDRESS}:6443 \
-  --kubeconfig=kube-proxy.kubeconfig
-```
+{
+  kubectl config set-cluster kubernetes-the-hard-way \
+    --certificate-authority=ca.pem \
+    --embed-certs=true \
+    --server=https://${KUBERNETES_PUBLIC_ADDRESS}:6443 \
+    --kubeconfig=kube-proxy.kubeconfig
 
-```shell
-kubectl config set-credentials kube-proxy \
-  --client-certificate=kube-proxy.pem \
-  --client-key=kube-proxy-key.pem \
-  --embed-certs=true \
-  --kubeconfig=kube-proxy.kubeconfig
-```
+  kubectl config set-credentials kube-proxy \
+    --client-certificate=kube-proxy.pem \
+    --client-key=kube-proxy-key.pem \
+    --embed-certs=true \
+    --kubeconfig=kube-proxy.kubeconfig
 
-```shell
-kubectl config set-context default \
-  --cluster=kubernetes-the-hard-way \
-  --user=kube-proxy \
-  --kubeconfig=kube-proxy.kubeconfig
-```
+  kubectl config set-context default \
+    --cluster=kubernetes-the-hard-way \
+    --user=kube-proxy \
+    --kubeconfig=kube-proxy.kubeconfig
 
-```shell
-kubectl config use-context default --kubeconfig=kube-proxy.kubeconfig
+  kubectl config use-context default --kubeconfig=kube-proxy.kubeconfig
+}
 ```
 
 Results:
@@ -166,20 +162,20 @@ Generate a kubeconfig file for the `admin` user:
     --certificate-authority=ca.pem \
     --embed-certs=true \
     --server=https://127.0.0.1:6443 \
-    --kubeconfig=admin.kubeconfig
+    --kubeconfig=sumanth.kubeconfig
 
-  kubectl config set-credentials admin \
-    --client-certificate=admin.pem \
-    --client-key=admin-key.pem \
+  kubectl config set-credentials sumanth \
+    --client-certificate=sumanth.pem \
+    --client-key=sumanth-key.pem \
     --embed-certs=true \
-    --kubeconfig=admin.kubeconfig
+    --kubeconfig=sumanth.kubeconfig
 
   kubectl config set-context default \
     --cluster=kubernetes-the-hard-way \
-    --user=admin \
-    --kubeconfig=admin.kubeconfig
+    --user=sumanth \
+    --kubeconfig=sumanth.kubeconfig
 
-  kubectl config use-context default --kubeconfig=admin.kubeconfig
+  kubectl config use-context default --kubeconfig=sumanth.kubeconfig
 }
 ```
 
@@ -205,11 +201,11 @@ done
 Copy the appropriate `kube-controller-manager` and `kube-scheduler` kubeconfig files to each controller instance:
 
 ```shell
-for instance in controller-0 controller-1 controller-2; do
+for instance in controller-0 controller-1; do
   PUBLIC_IP_ADDRESS=$(az network public-ip show -g kubernetes \
     -n ${instance}-pip --query "ipAddress" -otsv)
 
-  scp admin.kubeconfig kube-controller-manager.kubeconfig kube-scheduler.kubeconfig kuberoot@${PUBLIC_IP_ADDRESS}:~/
+  scp sumanth.kubeconfig kube-controller-manager.kubeconfig kube-scheduler.kubeconfig kuberoot@${PUBLIC_IP_ADDRESS}:~/
 done
 ```
 

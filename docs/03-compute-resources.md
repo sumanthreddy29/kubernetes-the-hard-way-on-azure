@@ -138,7 +138,7 @@ az vm availability-set create -g kubernetes -n controller-as
 ```
 
 ```shell
-for i in 0 1 2; do
+for i in 0 1; do
     echo "[Controller ${i}] Creating public IP..."
     az network public-ip create -n controller-${i}-pip -g kubernetes > /dev/null
 

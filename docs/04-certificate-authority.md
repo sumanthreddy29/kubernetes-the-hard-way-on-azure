@@ -38,11 +38,11 @@ cat > ca-csr.json <<EOF
   },
   "names": [
     {
-      "C": "IT",
-      "L": "Milan",
+      "C": "US",
+      "L": "Atlanta",
       "O": "Kubernetes",
-      "OU": "MI",
-      "ST": "Italy"
+      "OU": "MSFT",
+      "ST": "GA"
     }
   ]
 }
@@ -79,12 +79,12 @@ cat > admin-csr.json <<EOF
     "size": 2048
   },
   "names": [
-    {
-      "C": "IT",
-      "L": "Milan",
+     {
+      "C": "US",
+      "L": "Atlanta",
       "O": "system:masters",
-      "OU": "Kubernetes The Hard Way",
-      "ST": "Italy"
+       "OU": "Kubernetes The Hard Way",
+      "ST": "GA"
     }
   ]
 }
@@ -127,12 +127,12 @@ cat > ${instance}-csr.json <<EOF
     "size": 2048
   },
   "names": [
-    {
-      "C": "IT",
-      "L": "Milan",
+     {
+      "C": "US",
+      "L": "Atlanta",
       "O": "system:nodes",
       "OU": "Kubernetes The Hard Way",
-      "ST": "Italy"
+      "ST": "GA"
     }
   ]
 }
@@ -178,11 +178,11 @@ cat > kube-controller-manager-csr.json <<EOF
   },
   "names": [
     {
-      "C": "IT",
-      "L": "Milan",
+      "C": "US",
+      "L": "Atlanta",
       "O": "system:kube-controller-manager",
       "OU": "Kubernetes The Hard Way",
-      "ST": "Italy"
+      "ST": "GA"
     }
   ]
 }
@@ -219,11 +219,11 @@ cat > kube-proxy-csr.json <<EOF
   },
   "names": [
     {
-      "C": "IT",
-      "L": "Milano",
+      "C": "US",
+      "L": "Atlanta",
       "O": "system:node-proxier",
       "OU": "Kubernetes The Hard Way",
-      "ST": "Italy"
+      "ST": "GA"
     }
   ]
 }
@@ -264,11 +264,11 @@ cat > kube-scheduler-csr.json <<EOF
   },
   "names": [
     {
-      "C": "IT",
-      "L": "Milan",
+      "C": "US",
+      "L": "Atlanta",
       "O": "system:kube-scheduler",
       "OU": "Kubernetes The Hard Way",
-      "ST": "Italy"
+      "ST": "GA"
     }
   ]
 }
@@ -314,11 +314,11 @@ cat > kubernetes-csr.json <<EOF
   },
   "names": [
     {
-      "C": "IT",
-      "L": "Milan",
+      "C": "US",
+      "L": "Atlanta",
       "O": "Kubernetes",
       "OU": "Kubernetes The Hard Way",
-      "ST": "Italy"
+      "ST": "GA"
     }
   ]
 }
@@ -364,11 +364,11 @@ cat > service-account-csr.json <<EOF
   },
   "names": [
     {
-      "C": "IT",
-      "L": "Milan",
+      "C": "US",
+      "L": "Atlanta",
       "O": "Kubernetes",
       "OU": "Kubernetes The Hard Way",
-      "ST": "Italy"
+      "ST": "GA"
     }
   ]
 }
@@ -408,7 +408,7 @@ done
 Copy the appropriate certificates and private keys to each controller instance:
 
 ```shell
-for instance in controller-0 controller-1 controller-2; do
+for instance in controller-0 controller-1; do
   PUBLIC_IP_ADDRESS=$(az network public-ip show -g kubernetes \
     -n ${instance}-pip --query "ipAddress" -o tsv)
 
